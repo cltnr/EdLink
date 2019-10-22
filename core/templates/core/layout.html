@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'core/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/fa/css/font-awesome.min.css' %}">
+    <title>{% block title %} EdLink {% endblock %} - EdLink</title>
+    <style>
+        body {
+            margin-top: 70px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url "home" %}">EdLink</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar" style="max-height:500px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item {{ home_nav }}"><a href="{% url 'home' %}" class="nav-link">Accueil</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+<script src="{% static 'core/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'core/bootstrap.min.js' %}"></script>
+
+</html>
