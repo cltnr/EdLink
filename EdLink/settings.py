@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "core/static"),)
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 try:
     from .local_settings import *

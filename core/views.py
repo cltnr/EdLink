@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Link
+from .forms import LinkAdd
 
 # Create your views here.
 
