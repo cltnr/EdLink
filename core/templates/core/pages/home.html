@@ -4,20 +4,32 @@
 
 {% block content %}
     <div class="container">
-
         <div class="row">
             <h2 class="text-center display-4">EdLink</h2>
         </div>
+        <div class="jumbotron">
 
-        <div class="row">
-            <div class="col-sm-12">
-                <form class="form-inline" action="{% url "home" %}" method="post">
-                    {% csrf_token %}
-                    {{ form.link }}
-                    {{ form.url }}
-                    <button type="submit" class="btn btn-success">Ajouter &nbsp; <i class="fa fa-plus"></i></button>
-                </form>
-            </div>
+            <form class="form" action="{% url "home" %}" method="post">
+                <div class="row">
+                    <div class="form-group-lg col-sm-8">
+                        <div class="input-group">
+                            <div class="input-group-addon">http(s)://</div>
+                            {{ form.url }}
+                        </div>
+                    </div>
+                    <div class="form-group-lg col-sm-4">
+                        <div class="input-group">
+                            <div class="input-group-addon">{{ app_url }}/</div>
+                            {{ form.link }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:25px">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-plus"></i> Create link</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         {% if error %}
@@ -25,12 +37,6 @@
                 <div class="alert alert-danger text-center" role="alert" style="margin-top:20px;">
                     Ajout impossible : marque existante dans la base de données.
                 </div>
-            </div>
-        {% endif %}
-
-        {% if marques_liste.count == 0 %}
-            <div class="alert alert-success text-center" role="alert">
-                Aucune marque référencée. Vous ajouter une nouvelle marque en utilisant le formulaire ci-dessus.
             </div>
         {% endif %}
     </div>
