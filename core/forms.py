@@ -12,6 +12,6 @@ class LinkAdd(forms.Form):
         min_length=2,
         max_length=15,
 
-        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "wiki_saturn"})
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "WikiSaturn"})
     )
 
