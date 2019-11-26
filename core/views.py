@@ -20,7 +20,7 @@ def home(request):
 
         def randomLink(lenght):
             exists = True
-            while exists == True:
+            while exists:
                 link = ''.join(random.choice(string.ascii_letters) for i in range(lenght))
                 if not Link.objects.filter(link=link).exists(): exists = False
             return link
