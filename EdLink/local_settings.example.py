@@ -2,6 +2,9 @@
 # Get one from https://djecrety.ir/
 SECRET_KEY = ''
 
+# Fill this with your main URL
+APP_NAME = ""
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 

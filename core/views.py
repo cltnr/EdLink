@@ -1,7 +1,11 @@
+import random
+import string
+
 from django.shortcuts import render
-from .models import Link
+
+from EdLink.local_settings import APP_NAME
 from .forms import LinkAdd
-from django.contrib.sites.shortcuts import get_current_site
+from .models import Link
 
 
 # Create your views here.
@@ -9,17 +13,30 @@ from django.contrib.sites.shortcuts import get_current_site
 
 def home(request):
     home_nav = "active"
-
     # context = {"home_nav": "active"}
-    app_url = get_current_site(request).domain
-    print(app_url)
+    app_url = APP_NAME
     form = LinkAdd(request.POST or None)
     if form.is_valid():
-        error = False
-        user_data = form.cleaned_data["nom"]
-        if Link.objects.filter(name=user_data).exists():
-            error = True
-        else:
-            marque = Link(name=user_data).save()
+
+        def randomLink(lenght):
+            exists = True
+            while exists == True:
+                link = ''.join(random.choice(string.ascii_letters) for i in range(lenght))
+                if not Link.objects.filter(link=link).exists(): exists = False
+            return link
+
+        exists = False
+        link = form.cleaned_data["link"]
+        target = form.cleaned_data["target"]
+
+        if link == "":
+            if Link.objects.filter(link=link).exists():
+
+
+
+        # if Link.objects.filter(name=name).exists():
+        #     exists = True
+        # else:
+        #     link = Link(name=name, url=url).save()
 
     return render(request, "core/pages/home.html", locals())

@@ -4,44 +4,45 @@
 
 {% block content %}
     <div class="container">
-        {#        <div class="row">#}
-        {#            <h2 class="text-center display-4">EdLink</h2>#}
-        {#        </div>#}
-        {#        <div class="jumbotron">#}
-        <h2 class="text-center">EdLink<br/>
-            <small><i>URL shortener with statistics</i></small></h2>
-        {#        </div>#}
-        <div class="jumbotron">
+        <h2 class="text-center">EdLink<br/><small><i>URL shortener with statistics</i></small></h2>
+        <div class="jumbotron" style="margin-top:25px;">
 
             <form class="form" action="{% url "home" %}" method="post">
+                {% csrf_token %}
                 <div class="row">
-                    <div class="form-group-lg col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group-addon">http(s)://</div>
-                            {{ form.url }}
+                    <div class="col-lg-8">
+                        <div class="form-group-lg" style="margin-bottom: 10px">
+                            <div class="input-group">
+                                <div class="input-group-addon">http(s)://</div>
+                                {{ form.target }}
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group-lg col-sm-4">
-                        <div class="input-group">
-                            <div class="input-group-addon">{{ app_url }}/</div>
-                            {{ form.link }}
+                    <div class="col-lg-4">
+                        <div class="form-group-lg">
+                            <div class="input-group">
+                                <div class="input-group-addon">{{ app_url }}/</div>
+                                {{ form.link }}
+                            </div>
+                            <small class="form-text text-muted"><i>Short link is optional, a random one will be
+                                generated</i></small>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-top:25px">
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-link"></i> Shorten</button>
-                    </div>
+                <div class="row" style="margin-top:15px;">
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-link"></i> Shorten</button>
                 </div>
-            </form>
         </div>
+        </form>
+    </div>
 
-        {% if error %}
-            <div class="row">
-                <div class="alert alert-danger text-center" role="alert" style="margin-top:20px;">
-                    Ajout impossible : marque existante dans la base de données.
-                </div>
+    {% if exists %}
+        <div class="row">
+            <div class="alert alert-danger text-center" role="alert" style="margin-top:20px;">
+                Ajout impossible : marque existante dans la base de données.
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
     </div>
 {% endblock %}

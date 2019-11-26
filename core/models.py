@@ -4,8 +4,8 @@ from django.db import models
 
 
 class Link(models.Model):
-    name = models.CharField(max_length=15)
-    url = models.CharField(max_length=200)
+    link = models.CharField(max_length=15)
+    target = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
