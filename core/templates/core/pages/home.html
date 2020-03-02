@@ -4,8 +4,15 @@
 
 {% block content %}
     <div class="container">
-        <h2 class="text-center">EdLink<br/><small><i>URL shortener with statistics</i></small></h2>
-        <div class="jumbotron" style="margin-top:25px;">
+        <h2 class="text-center" style="margin-bottom:25px;">EdLink<br/><small><i>URL shortener with
+            statistics</i></small></h2>
+
+        {% if  custom_link_exists %}
+            <div class="alert alert-danger" role="alert">
+                <b>Warning:</b> Specified custom link already exists. A random one has been generated instead.
+            </div>
+        {% endif %}
+        <div class="jumbotron">
 
             <form class="form" action="{% url "home" %}" method="post">
                 {% csrf_token %}
@@ -30,19 +37,11 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top:15px;">
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-link"></i> Shorten</button>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-link"></i> Shorten</button>
+                    </div>
                 </div>
+            </form>
         </div>
-        </form>
-    </div>
-
-    {% if exists %}
-        <div class="row">
-            <div class="alert alert-danger text-center" role="alert" style="margin-top:20px;">
-                Ajout impossible : marque existante dans la base de données.
-            </div>
-        </div>
-    {% endif %}
     </div>
 {% endblock %}
