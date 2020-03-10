@@ -53,7 +53,6 @@ def home(request):
                 form.fields['target'].initial = input_target
                 form.fields['link'].initial = random_link(9)
                 custom_link_exists = True
-
                 return render(request, "core/pages/home.html", locals())
 
         return redirect('link_infos', input_link)
