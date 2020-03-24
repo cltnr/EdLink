@@ -8,7 +8,7 @@ from .forms import LinkAdd
 from .models import Link
 
 
-# Create your views here.
+# Create your views here.xx
 
 
 def home(request):
