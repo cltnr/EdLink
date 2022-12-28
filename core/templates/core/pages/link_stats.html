@@ -3,63 +3,66 @@
 {% block title %}Stats for {{ link.link }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2 class="text-center" style="margin-bottom:25px;">Link statistics<br/></h2>
+<div class="container">
+  <h2 class="text-center" style="margin-bottom:25px;">Link statistics<br /></h2>
 
-        <div class="jumbotron">
-            <div class="text-center">
-                <h3><b>Short link : </b><a
-                        href="http://{{ request.get_host }}/{{ link.link }}">{{ request.get_host }}/{{ link.link }}</a>&nbsp;
-                    <button type="submit" class="btn btn-info"
-                            onclick="copyTextToClipboard('{{ request.get_host }}/{{ link.link }}')"><i
-                            class="fa fa-copy"></i>
-                        Copy
-                    </button>
-                </h3>
-            </div>
-            <div class="text-center"><h4><b>URL : </b><a href="{{ link.target }}">{{ link.target }}</a></h4></div>
-            <div class="text-center"><b>Creation date : </b>{{ link.creation|date:"Y-m-d H:i" }}</div>
-            <div class="text-center"><b>Views : </b>{{ link.views }}</div>
-        </div>
-
+  <div class="jumbotron">
+    <div class="text-center">
+      <h3><b>Short link : </b>
+        <a href="http://{{ request.get_host }}/{{ link.link }}">{{ request.get_host }}/{{ link.link }}</a>&nbsp;
+        <button type="submit" class="btn btn-info"
+          onclick="copyTextToClipboard('{{ request.get_host }}/{{ link.link }}')"><i class="fa fa-copy"></i>
+          Copy
+        </button>
+      </h3>
     </div>
+    <div class="text-center">
+      <h4><b>URL : </b><a href="{{ link.target }}">{{ link.target }}</a></h4>
+    </div>
+    <div class="text-center"><b>Creation date : </b>{{ link.creation|date:"Y-m-d H:i" }}</div>
+    <div class="text-center"><b>Views : </b>{{ link.views }}</div>
+  </div>
+  <div class="text-center"><small class="form-text text-muted"><i>Append <b>+</b> to any short link to see statistics : {{ request.get_host }}/{{ link.link }}<b>+</b></i></small></div>
+
+
+</div>
 {% endblock %}
 
 {% block script %}
-    <script>
-    function fallbackCopyTextToClipboard(text) {
-      var textArea = document.createElement("textarea");
-      textArea.value = text;
+<script>
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
 
-      // Avoid scrolling to bottom
-      textArea.style.top = "0";
-      textArea.style.left = "0";
-      textArea.style.position = "fixed";
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
 
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
 
-      try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('Fallback: Copying text command was ' + msg);
-      } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
-      }
-
-      document.body.removeChild(textArea);
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Fallback: Copying text command was ' + msg);
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
     }
-    function copyTextToClipboard(text) {
-      if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
-        return;
-      }
-      navigator.clipboard.writeText(text).then(function() {
-        console.log('Async: Copying to clipboard was successful!');
-      }, function(err) {
-        console.error('Async: Could not copy text: ', err);
-      });
+
+    document.body.removeChild(textArea);
+  }
+  function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
     }
-    </script>
+    navigator.clipboard.writeText(text).then(function () {
+      console.log('Async: Copying to clipboard was successful!');
+    }, function (err) {
+      console.error('Async: Could not copy text: ', err);
+    });
+  }
+</script>
 {% endblock %}
