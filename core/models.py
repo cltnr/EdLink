@@ -11,4 +11,4 @@ class Link(models.Model):
     creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.link+" : "+self.target
+        return self.link + " : " + self.target

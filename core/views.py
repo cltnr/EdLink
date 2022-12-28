@@ -19,7 +19,10 @@ def home(request):
         random_exists = True
         random_link = ""
         while random_exists:
-            random_link = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(length))
+            random_link = "".join(
+                random.choice(string.ascii_letters + string.digits)
+                for i in range(length)
+            )
             if not link_exists(random_link):
                 random_exists = False
         return random_link
@@ -34,9 +37,12 @@ def home(request):
         input_link = form.cleaned_data["link"]
         input_target = form.cleaned_data["target"]
 
-        if not input_target.startswith("http://") and not input_target.startswith("https://"):
-            final_target = "http://"+input_target
-        else: final_target = input_target
+        if not input_target.startswith("http://") and not input_target.startswith(
+            "https://"
+        ):
+            final_target = "http://" + input_target
+        else:
+            final_target = input_target
 
         # Si l'user ne donne pas de lien
         if input_link == "":
@@ -50,12 +56,12 @@ def home(request):
             # Le lien existe déjà : on en propose un random
             else:
                 form = LinkAdd(None)
-                form.fields['target'].initial = input_target
-                form.fields['link'].initial = random_link(9)
+                form.fields["target"].initial = input_target
+                form.fields["link"].initial = random_link(9)
                 custom_link_exists = True
                 return render(request, "core/pages/home.html", locals())
 
-        return redirect('link_infos', input_link)
+        return redirect("link_infos", input_link)
     return render(request, "core/pages/home.html", locals())
 
 
